@@ -9,15 +9,23 @@ module.exports = async function handler(req, res) {
     if (req.method !== 'POST') return res.status(405).json({ error: 'Method Not Allowed' });
 
     try {
-        const response = await fetch(N8N_WEBHOOK, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(req.body),
-        });
-        const text = await response.text();
-        res.status(response.status).send(text || 'ok');
+        const data = req.body;
+
+        // Convertir JSON a query params (n8n espera GET con parámetros en la URL)
+        const params = new URLSearchParams();
+        if (data) {
+            for (const [key, value] of Object.entries(data)) {
+                params.append(key, String(value));
+            }
+        }
+
+        const url = `${N8N_WEBHOOK}?${params.toString()}`;
+        const response = await fetch(url);
+        const json = await response.json();
+
+        res.status(response.status).json(json);
     } catch (error) {
         console.error('Proxy Error:', error);
-        res.status(500).json({ error: 'Internal Server Error', details: error.message });
+        res.status(500).json({ error: 'Error de conexión con el backend' });
     }
 };
