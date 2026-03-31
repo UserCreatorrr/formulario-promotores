@@ -79,8 +79,8 @@
         <input type="email" id="email" placeholder="tu@email.com" autocomplete="email" required />
       </div>
       <div class="field">
-        <label for="web">P&aacute;gina web</label>
-        <input type="text" id="web" placeholder="https://tuwebsite.com" autocomplete="off" />
+        <label for="web">Web de tu negocio <span class="req">*</span></label>
+        <input type="text" id="web" placeholder="https://tuwebsite.com" autocomplete="off" required />
       </div>
       <div class="field">
         <label for="redes">Instagram / Redes sociales <span class="req">*</span></label>
@@ -132,6 +132,7 @@
       if (!nombre) { showError('El nombre completo es obligatorio.'); return; }
       if (!email)  { showError('El email es obligatorio.'); return; }
       if (!/\S+@\S+\.\S+/.test(email)) { showError('Introduce un email válido.'); return; }
+      if (!web)    { showError('La web de tu negocio es obligatoria.'); return; }
       if (!redes)  { showError('Instagram / Redes sociales es obligatorio.'); return; }
 
       var btn = document.getElementById('btn-submit');
