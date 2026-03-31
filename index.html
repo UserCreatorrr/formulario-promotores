@@ -86,6 +86,10 @@
         <label for="ciudad">Ciudad / Pa&iacute;s</label>
         <input type="text" id="ciudad" placeholder="ej: Barcelona, Espa&ntilde;a" autocomplete="off" />
       </div>
+      <div class="field">
+        <label for="web">P&aacute;gina web</label>
+        <input type="text" id="web" placeholder="https://tuwebsite.com" autocomplete="off" />
+      </div>
       <div class="divider"></div>
       <button class="btn-submit" id="btn-submit" onclick="handleSubmit()">
         <svg class="wa-icon" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -123,6 +127,7 @@
       var email  = document.getElementById('email').value.trim();
       var redes  = document.getElementById('redes').value.trim();
       var ciudad = document.getElementById('ciudad').value.trim();
+      var web    = document.getElementById('web').value.trim();
 
       if (!nombre) { showError('El nombre completo es obligatorio.'); return; }
       if (!email)  { showError('El email es obligatorio.'); return; }
@@ -135,8 +140,8 @@
 
       var params = new URLSearchParams({
         nombre: nombre, email: email,
-        redes_sociales: redes, ciudad_pais: ciudad,
-        empresa: '', web: '', tipo_publico: '', comunidad_activa: '',
+        redes_sociales: redes, ciudad_pais: ciudad, web: web,
+        empresa: '', tipo_publico: '', comunidad_activa: '',
         plataformas: '', ha_promocionado: '', tipo_eventos: '',
         entradas_por_evento: '', experiencia_afiliado: '',
         capacidad_venta: '', estrategia_venta: '', motivacion: '',
